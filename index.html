@@ -28,13 +28,15 @@
       margin: 20px auto;
       display: block;
     }
-    #result {
+    #outputBox {
       margin-top: 20px;
       font-size: 24px;
       background: rgba(0,0,0,0.6);
       padding: 20px;
       border-radius: 10px;
       display: inline-block;
+      word-wrap: break-word;
+      max-width: 90%;
     }
     button {
       padding: 10px 20px;
@@ -46,13 +48,20 @@
       color: #000;
       cursor: pointer;
     }
+    p.footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #ccc;
+    }
   </style>
 </head>
 <body>
   <h1>ITS Stylish Name Generator</h1>
-  <input type="text" id="nameInput" placeholder="Enter your name..." oninput="generate()"/>
-  <div id="result"></div>
+  <input type="text" id="nameInput" placeholder="Enter your name..." oninput="generateName()"/>
+  <div id="outputBox"></div>
+  <br>
   <button onclick="copyText()">Copy</button>
+  <p class="footer">Create By Its D.X</p>
 
   <script>
     function stylishName(name) {
@@ -60,9 +69,10 @@
       const suffix = "﷽";
       if (!name) return "";
 
-      const firstChar = name[0].toUpperCase();
-      const regional = (firstChar >= 'A' && firstChar <= 'Z') ?
-        String.fromCodePoint(0x1F1E6 + firstChar.charCodeAt(0) - 65) + '\u200C' : name[0];
+      const firstChar = name[0];
+      const regional = (firstChar.toUpperCase() >= 'A' && firstChar.toUpperCase() <= 'Z')
+        ? String.fromCodePoint(0x1F1E6 + firstChar.toUpperCase().charCodeAt(0) - 65) + '\u200C'
+        : firstChar;
 
       const rest = name.slice(1);
       const map = {
@@ -71,48 +81,8 @@
         'O': 'ᴏ', 'P': 'ᴘ', 'Q': 'ǫ', 'R': 'ʀ', 'S': 's', 'T': 'ᴛ', 'U': 'ᴜ',
         'V': 'ᴠ', 'W': 'ᴡ', 'X': 'x', 'Y': 'ʏ', 'Z': 'ᴢ'
       };
+
       const restStyled = [...rest].map(c => map[c.toUpperCase()] || c).join('');
-      return prefix + regional + restStyled + suffix;
-    }
-
-    function generate() {
-      const input = document.getElementById("nameInput").value;
-      document.getElementById("result").innerText = stylishName(input);
-    }
-
-    function copyText() {
-      const text = document.getElementById("result").innerText;
-      navigator.clipboard.writeText(text).then(() => alert("Copied!"));
-    }
-  </script>
-</body>
-</html>
-="outputBox"></div>
-    <button class="copy-button" onclick="copyText()">Copy</button>
-  </div>
-  <p style="margin-top: 40px; font-size: 14px; color: #ccc;">Create By Its D.X</p>
-
-  <script>
-    function stylishName(name) {
-      const prefix = "ᶦƬˢ⃝🎀";
-      const suffix = "﷽";
-
-      if (name.length === 0) return "";
-
-      const firstChar = name[0];
-      const regional = (firstChar.toUpperCase() >= 'A' && firstChar.toUpperCase() <= 'Z')
-        ? String.fromCodePoint(0x1F1E6 + firstChar.toUpperCase().charCodeAt(0) - 65) + '‌'
-        : firstChar;
-
-      const rest = name.slice(1);
-      const smallCaps = {
-        'A': 'ᴀ', 'B': 'ʙ', 'C': 'ᴄ', 'D': 'ᴅ', 'E': 'ᴇ', 'F': 'ғ', 'G': 'ɢ',
-        'H': 'ʜ', 'I': 'ɪ', 'J': 'ᴊ', 'K': 'ᴋ', 'L': 'ʟ', 'M': 'ᴍ', 'N': 'ɴ',
-        'O': 'ᴏ', 'P': 'ᴘ', 'Q': 'ǫ', 'R': 'ʀ', 'S': 's', 'T': 'ᴛ', 'U': 'ᴜ',
-        'V': 'ᴠ', 'W': 'ᴡ', 'X': 'x', 'Y': 'ʏ', 'Z': 'ᴢ'
-      };
-
-      const restStyled = rest.split('').map(c => smallCaps[c.toUpperCase()] || c).join('');
       return prefix + regional + restStyled + suffix;
     }
 
@@ -124,7 +94,16 @@
 
     function copyText() {
       const text = document.getElementById("outputBox").innerText;
-      navigator.clipboard.writeText(text);
+      if (!text) {
+        alert("Nothing to copy!");
+        return;
+      }
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied!");
+      }).catch(err => {
+        alert("Failed to copy: " + err);
+      });
     }
   </script>
 </body>
