@@ -1,106 +1,88 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stylish Name Generator</title>
+  <title>ITS Stylish Name Generator</title>
   <style>
     body {
-      background: linear-gradient(135deg, #ffe1f1, #d0eaff);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
     }
-
     h1 {
-      color: #ff3399;
-      margin-bottom: 20px;
+      margin-top: 60px;
+      font-size: 2rem;
+      text-shadow: 2px 2px #000;
     }
-
     input {
       padding: 10px;
       font-size: 18px;
-      border: 2px solid #ff99cc;
-      border-radius: 10px;
-      width: 90%;
+      width: 80%;
       max-width: 300px;
-      margin-bottom: 15px;
-    }
-
-    button {
-      background-color: #ff3399;
-      color: white;
-      padding: 10px 20px;
+      border-radius: 5px;
       border: none;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
+      margin: 20px auto;
+      display: block;
     }
-
-    button:hover {
-      background-color: #e60073;
-    }
-
-    .output-box {
-      margin-top: 30px;
+    #result {
+      margin-top: 20px;
+      font-size: 24px;
+      background: rgba(0,0,0,0.6);
       padding: 20px;
-      border: 2px dashed #ff3399;
-      background-color: #fff;
-      border-radius: 15px;
-      font-size: 22px;
-      white-space: pre-wrap;
-      text-align: center;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffc107;
+      color: #000;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>ITS Stylish Name</h1>
-  <input type="text" id="nameInput" placeholder="Enter Your Name" />
-  <button onclick="generate()">Generate</button>
-
-  <div id="output" class="output-box"></div>
+  <h1>ITS Stylish Name Generator</h1>
+  <input type="text" id="nameInput" placeholder="Enter your name..." oninput="generate()"/>
+  <div id="result"></div>
+  <button onclick="copyText()">Copy</button>
 
   <script>
     function stylishName(name) {
       const prefix = "ᶦƬˢ⃝🎀";
       const suffix = "﷽";
+      if (!name) return "";
 
-      if (name.length === 0) return "";
-
-      const firstChar = name[0];
-      let regional = firstChar;
-      if (/[a-zA-Z]/.test(firstChar)) {
-        regional = String.fromCodePoint(0x1F1E6 + firstChar.toUpperCase().charCodeAt(0) - 65) + '\u200C';
-      }
+      const firstChar = name[0].toUpperCase();
+      const regional = (firstChar >= 'A' && firstChar <= 'Z') ?
+        String.fromCodePoint(0x1F1E6 + firstChar.charCodeAt(0) - 65) + '\u200C' : name[0];
 
       const rest = name.slice(1);
-
-      const smallCaps = {
+      const map = {
         'A': 'ᴀ', 'B': 'ʙ', 'C': 'ᴄ', 'D': 'ᴅ', 'E': 'ᴇ', 'F': 'ғ', 'G': 'ɢ',
         'H': 'ʜ', 'I': 'ɪ', 'J': 'ᴊ', 'K': 'ᴋ', 'L': 'ʟ', 'M': 'ᴍ', 'N': 'ɴ',
         'O': 'ᴏ', 'P': 'ᴘ', 'Q': 'ǫ', 'R': 'ʀ', 'S': 's', 'T': 'ᴛ', 'U': 'ᴜ',
         'V': 'ᴠ', 'W': 'ᴡ', 'X': 'x', 'Y': 'ʏ', 'Z': 'ᴢ'
       };
-
-      const restStyled = rest.split('').map(c => {
-        const upper = c.toUpperCase();
-        return smallCaps[upper] || c;
-      }).join('');
-
+      const restStyled = [...rest].map(c => map[c.toUpperCase()] || c).join('');
       return prefix + regional + restStyled + suffix;
     }
 
     function generate() {
-      const name = document.getElementById('nameInput').value.trim();
-      const styled = stylishName(name);
-      const width = styled.length + 10;
-      const top = "╭" + "─".repeat(width) + "╮";
-      const middle = "│" + " ".repeat((width - styled.length) / 2) + styled + " ".repeat((width - styled.length) / 2) + "│";
-      const bottom = "╰" + "─".repeat(width) + "╯";
-      document.getElementById('output').textContent = `${top}\n${middle}\n${bottom}`;
+      const input = document.getElementById("nameInput").value;
+      document.getElementById("result").innerText = stylishName(input);
+    }
+
+    function copyText() {
+      const text = document.getElementById("result").innerText;
+      navigator.clipboard.writeText(text).then(() => alert("Copied!"));
     }
   </script>
 </body>
