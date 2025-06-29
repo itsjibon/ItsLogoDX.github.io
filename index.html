@@ -13,8 +13,12 @@
       background: url('bg.jpg') no-repeat center center fixed;
       background-size: cover;
     }
+    .logo {
+      margin-top: 30px;
+      max-width: 200px;
+    }
     h1 {
-      margin-top: 60px;
+      margin-top: 10px;
       font-size: 2rem;
       text-shadow: 2px 2px #000;
     }
@@ -56,24 +60,22 @@
   </style>
 </head>
 <body>
+  <img src="its-logo.png" alt="ITS Logo" class="logo" />
   <h1>ITS Stylish Name Generator</h1>
   <input type="text" id="nameInput" placeholder="Enter your name..." oninput="generateName()"/>
   <div id="outputBox"></div>
   <br>
   <button onclick="copyText()">Copy</button>
   <p class="footer">Create By Its D.X</p>
-
   <script>
     function stylishName(name) {
       const prefix = "ᶦƬˢ⃝🎀";
       const suffix = "﷽";
       if (!name) return "";
-
       const firstChar = name[0];
       const regional = (firstChar.toUpperCase() >= 'A' && firstChar.toUpperCase() <= 'Z')
         ? String.fromCodePoint(0x1F1E6 + firstChar.toUpperCase().charCodeAt(0) - 65) + '\u200C'
         : firstChar;
-
       const rest = name.slice(1);
       const map = {
         'A': 'ᴀ', 'B': 'ʙ', 'C': 'ᴄ', 'D': 'ᴅ', 'E': 'ᴇ', 'F': 'ғ', 'G': 'ɢ',
@@ -81,24 +83,20 @@
         'O': 'ᴏ', 'P': 'ᴘ', 'Q': 'ǫ', 'R': 'ʀ', 'S': 's', 'T': 'ᴛ', 'U': 'ᴜ',
         'V': 'ᴠ', 'W': 'ᴡ', 'X': 'x', 'Y': 'ʏ', 'Z': 'ᴢ'
       };
-
       const restStyled = [...rest].map(c => map[c.toUpperCase()] || c).join('');
       return prefix + regional + restStyled + suffix;
     }
-
     function generateName() {
       const name = document.getElementById("nameInput").value;
       const output = stylishName(name);
       document.getElementById("outputBox").innerText = output;
     }
-
     function copyText() {
       const text = document.getElementById("outputBox").innerText;
       if (!text) {
         alert("Nothing to copy!");
         return;
       }
-
       navigator.clipboard.writeText(text).then(() => {
         alert("Copied!");
       }).catch(err => {
