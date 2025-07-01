@@ -7,51 +7,55 @@
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      color: #fff;
-      text-align: center;
-      background: url('bg.jpg') no-repeat center center fixed;
+      background-image: url('./bg.jpg');
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
     }
+
     .logo {
       margin-top: 30px;
-      max-width: 200px;
+      width: 150px;
     }
+
     h1 {
-      margin-top: 10px;
-      font-size: 2rem;
       text-shadow: 2px 2px #000;
     }
+
     input {
+      margin-top: 20px;
       padding: 10px;
       font-size: 18px;
-      width: 80%;
-      max-width: 300px;
       border-radius: 5px;
       border: none;
-      margin: 20px auto;
-      display: block;
+      width: 80%;
+      max-width: 300px;
     }
+
     #outputBox {
       margin-top: 20px;
-      font-size: 24px;
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
+      font-size: 22px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
       border-radius: 10px;
       display: inline-block;
-      word-wrap: break-word;
-      max-width: 90%;
     }
+
     button {
+      margin-top: 10px;
       padding: 10px 20px;
-      margin-top: 15px;
       font-size: 16px;
-      border: none;
-      border-radius: 8px;
       background-color: #ffc107;
-      color: #000;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
     }
+
     p.footer {
       margin-top: 40px;
       font-size: 14px;
@@ -60,14 +64,14 @@
   </style>
 </head>
 <body>
-  <img src="its-logo.png" alt="ITS Logo" class="logo" />
+  <img src="its-logo.png" class="logo" alt="ITS Logo" />
   <h1>ITS Stylish Name Generator</h1>
   <input type="text" id="nameInput" placeholder="Enter your name..." oninput="generateName()"/>
   <div id="outputBox"></div>
   <br>
   <button onclick="copyText()">Copy</button>
   <p class="footer">Create By Its D.X</p>
-  
+
   <script>
     function stylishName(name) {
       const prefix = "ᶦƬˢ⃝🎀";
