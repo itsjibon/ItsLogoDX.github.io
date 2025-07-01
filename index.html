@@ -67,6 +67,7 @@
   <br>
   <button onclick="copyText()">Copy</button>
   <p class="footer">Create By Its D.X</p>
+  
   <script>
     function stylishName(name) {
       const prefix = "ᶦƬˢ⃝🎀";
@@ -86,11 +87,13 @@
       const restStyled = [...rest].map(c => map[c.toUpperCase()] || c).join('');
       return prefix + regional + restStyled + suffix;
     }
+
     function generateName() {
       const name = document.getElementById("nameInput").value;
       const output = stylishName(name);
       document.getElementById("outputBox").innerText = output;
     }
+
     function copyText() {
       const text = document.getElementById("outputBox").innerText;
       if (!text) {
