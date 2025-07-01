@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
       font-family: Arial, sans-serif;
       color: #fff;
       text-align: center;
-      background: url('bg.jpg') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
       background-size: cover;
     }
     .logo {
@@ -67,6 +68,7 @@
   <br>
   <button onclick="copyText()">Copy</button>
   <p class="footer">Create By Its D.X</p>
+
   <script>
     function stylishName(name) {
       const prefix = "ᶦƬˢ⃝🎀";
@@ -86,11 +88,13 @@
       const restStyled = [...rest].map(c => map[c.toUpperCase()] || c).join('');
       return prefix + regional + restStyled + suffix;
     }
+
     function generateName() {
       const name = document.getElementById("nameInput").value;
       const output = stylishName(name);
       document.getElementById("outputBox").innerText = output;
     }
+
     function copyText() {
       const text = document.getElementById("outputBox").innerText;
       if (!text) {
