@@ -1,5 +1,5 @@
 ItsLogoDX.github.io/
-├── index.html
-├── bg.jpg
-├── its-logo.png
-├── README.md
+├── index.html         ✅ (এই ফাইলটা তোমার মূল HTML)
+├── bg.jpg             ✅ (ব্যাকগ্রাউন্ড ইমেজ)
+├── its-logo.png       ✅ (লোগো ইমেজ)
+├── README.md          ✅ (GitHub ডিফল্ট)
