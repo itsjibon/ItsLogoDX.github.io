@@ -7,55 +7,51 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
-      background-image: url('./bg.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: white;
+      color: #fff;
       text-align: center;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
     }
-
     .logo {
       margin-top: 30px;
-      width: 150px;
+      max-width: 200px;
     }
-
     h1 {
+      margin-top: 10px;
+      font-size: 2rem;
       text-shadow: 2px 2px #000;
     }
-
     input {
-      margin-top: 20px;
       padding: 10px;
       font-size: 18px;
-      border-radius: 5px;
-      border: none;
       width: 80%;
       max-width: 300px;
+      border-radius: 5px;
+      border: none;
+      margin: 20px auto;
+      display: block;
     }
-
     #outputBox {
       margin-top: 20px;
-      font-size: 22px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 15px;
+      font-size: 24px;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
       border-radius: 10px;
       display: inline-block;
+      word-wrap: break-word;
+      max-width: 90%;
     }
-
     button {
-      margin-top: 10px;
       padding: 10px 20px;
+      margin-top: 15px;
       font-size: 16px;
-      background-color: #ffc107;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      background-color: #ffc107;
+      color: #000;
       cursor: pointer;
     }
-
     p.footer {
       margin-top: 40px;
       font-size: 14px;
@@ -64,14 +60,13 @@
   </style>
 </head>
 <body>
-  <img src="its-logo.png" class="logo" alt="ITS Logo" />
+  <img src="its-logo.png" alt="ITS Logo" class="logo" />
   <h1>ITS Stylish Name Generator</h1>
   <input type="text" id="nameInput" placeholder="Enter your name..." oninput="generateName()"/>
   <div id="outputBox"></div>
   <br>
   <button onclick="copyText()">Copy</button>
   <p class="footer">Create By Its D.X</p>
-
   <script>
     function stylishName(name) {
       const prefix = "ᶦƬˢ⃝🎀";
@@ -91,13 +86,11 @@
       const restStyled = [...rest].map(c => map[c.toUpperCase()] || c).join('');
       return prefix + regional + restStyled + suffix;
     }
-
     function generateName() {
       const name = document.getElementById("nameInput").value;
       const output = stylishName(name);
       document.getElementById("outputBox").innerText = output;
     }
-
     function copyText() {
       const text = document.getElementById("outputBox").innerText;
       if (!text) {
